@@ -1,0 +1,21 @@
+<div class="w-full h-screen flex items-center justify-center flex-col">
+  <img src="/pg_logo.jpg" alt="" class="w-24 rounded-full">
+  <span class="text-blue-700 text-2xl font-bold">PGTalk</span>
+
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "w-full lg:w-2/5 mx-auto h-1/2 flex justify-center items-center flex-col", autocomplete: "off"}) do |f| %>
+    <div class="border-b-2 border-solid border-gray-200 w-4/5 h-10 mb-5">
+      <%= f.email_field :email, autofocus: true, autocomplete: "off", placeholder: "exampleEmail", class: "w-full h-full focus:outline-none" %>
+    </div>
+
+    <div class="border-b-2 border-solid border-gray-200 w-4/5 h-10">
+      <%= f.password_field :password, autocomplete: "new-password", placeholder: "Password", class: "w-full h-full focus:outline-none" %>
+    </div>
+
+    <div class="w-4/5">
+      <%= f.submit 'Login', class: "w-full border border-solid border-gray-200 rounded bg-gray-300 mt-7 py-2 text-md text-white" %>
+      <%= link_to 'Register', new_user_registration_path, class: "w-full border border-solid border-blue-400 rounded mt-4 py-2 text-md text-blue-400 hover:bg-blue-400 hover:text-white" %>
+      <%= button_to 'Register', new_user_registration_path, class: "w-full border border-solid border-blue-400 rounded mt-4 py-2 text-md text-blue-400 hover:bg-blue-400 hover:text-white" %>
+      <%= link_to 'Forgot password', new_user_password_path, class: "text-xs text-gray-400 mt-5" %>
+    </div>
+  <% end %>
+</div>
