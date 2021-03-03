@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_04_155910) do
+ActiveRecord::Schema.define(version: 2021_02_11_171520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "stores", force: :cascade do |t|
+    t.decimal "store_lat", precision: 10, scale: 6
+    t.decimal "store_lng", precision: 10, scale: 6
+    t.string "store_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["store_lat", "store_lng"], name: "index_stores_on_store_lat_and_store_lng"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false

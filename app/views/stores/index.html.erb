@@ -1,0 +1,21 @@
+<h1 class="text-5xl text-center py-10">All Store</h1>
+
+<table class="text-left mx-auto w-1/2">
+  <thead>
+    <tr>
+      <th scope="col">StoreName</th>
+      <th scope="col">Latitude</th>
+      <th scope="col">Longitude</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @stores.each do |store| %>
+    <tr>
+      <th scope="row"><%= store.store_name %></th>
+      <td><%= store.store_lat %></td>
+      <td><%= store.store_lng %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+

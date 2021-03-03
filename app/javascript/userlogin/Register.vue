@@ -1,12 +1,22 @@
 <template>
 <div class="w-full h-screen flex items-center justify-center flex-col">
-  <img src="../../../public/pg_logo.jpg" alt="" class="w-24 rounded-full">
-  <span class="text-blue-700 text-2xl font-bold">PGTalk</span>
+    <div>
+      <img src="../../../public/user_default.png" alt="" class="rounded-full">
+    </div>
    <form class="w-full lg:w-2/5 mx-auto h-1/2 flex justify-center items-center flex-col" autocomplete="off">
     <div class="border-b-2 border-solid border-gray-200 w-4/5 h-10 mb-5">
       <input
         type="text"
-        :placeholder="exampleEmail"
+        placeholder="Nickname"
+        class="w-full h-full focus:outline-none"
+        autocomplete="off"
+        ref="userNickName"
+      >
+    </div>
+    <div class="border-b-2 border-solid border-gray-200 w-4/5 h-10 mb-5">
+      <input
+        type="text"
+        placeholder="Email"
         class="w-full h-full focus:outline-none"
         autocomplete="off"
         ref="userEmail"
@@ -21,17 +31,14 @@
         ref="userPwd"
       >
     </div>
-
-      <a
-        class="w-4/5 text-center border border-solid border-gray-200 rounded bg-gray-300 mt-7 py-2 text-md text-white"
-        @click.prevent="submit()"
-      >Login</a>
-  
-      <router-link
-        class="w-4/5 text-center border border-solid border-blue-400 rounded mt-4 py-2 text-md text-blue-400 hover:bg-blue-400 hover:text-white"
-        to="/register"
-      >Register</router-link>
-    <a href="#" class="text-xs text-gray-400 mt-5">Forgot password</a>
+    <div class="w-4/5 h-10">
+      <button class="focus:outline-none w-full h-full my-5 border border-solid border-indigo-400 bg-indigo-400 text-white rounded">Register</button>
+    </div>
+    <router-link
+      class="w-4/5 text-center border border-solid border-blue-400 rounded mt-10 py-2 text-md text-blue-400 hover:bg-blue-400 hover:text-white"
+      to="/login"
+    >Login</router-link>
+      
   </form>
 </div>
 
@@ -41,14 +48,15 @@
 export default {
   data() {
     return {
-      exampleEmail: 'EX: Jerry@gmail.com',
       form: new FormData()
     }
   },
   methods: {
     submit() {
+      const nickName = this.$refs.userNickName.value
       const userEmail = this.$refs.userEmail.value
       const userPwd = this.$refs.userPwd.value
+      this.form.append('nick_name', nickName)
       this.form.append('user_email', userEmail)
       this.form.append('user_pwd', userPwd)
     }
