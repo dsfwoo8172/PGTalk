@@ -6,9 +6,10 @@ namespace :fake_store do
   task fake_store: :environment do
     10.times do
       Store.create!(
-        store_latitude: Faker::Address.latitude,
-        store_longitude: Faker::Address.longitude,
-        store_name: Faker::Company.name
+        latitude: Faker::Address.latitude,
+        longitude: Faker::Address.longitude,
+        store_name: Faker::Company.name,
+        address: Faker::Address.full_address
       )
     end
   end

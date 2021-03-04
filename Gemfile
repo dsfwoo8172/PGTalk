@@ -34,6 +34,7 @@ group :development, :test do
   gem 'faker'
   gem 'foreman', '~> 0.87.2'
   gem 'rspec-rails', '~> 4.0', '>= 4.0.2'
+  gem 'geocoder'
 end
 
 group :development do
