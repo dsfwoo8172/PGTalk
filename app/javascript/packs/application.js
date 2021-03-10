@@ -7,6 +7,9 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+import $ from 'jquery'
+global.$ = $;
+
 import "stylesheets/application"
 import "../script"
 

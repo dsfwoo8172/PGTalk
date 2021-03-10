@@ -4,7 +4,7 @@ require 'faker'
 namespace :fake_store do
   desc 'Create fake store data'
   task fake_store: :environment do
-    10.times do
+    1000.times do
       Store.create!(
         latitude: Faker::Address.latitude,
         longitude: Faker::Address.longitude,
