@@ -12,15 +12,11 @@ window.addEventListener('turbolinks:load', function(){
   }
 
   function success(position) {
-    console.log(position.coords.longitude);
-    console.log(position.coords.latitude);
     $.ajax({
       type: 'get',
       url: `/stores/get_location.json?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}`,
       success: (result) => {
-        // console.log(result)
         locationVals = result
-        console.log(locationVals)
         createBtns(locationVals)
       },
       error: (err) => console.log(err.status)

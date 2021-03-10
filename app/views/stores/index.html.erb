@@ -1,5 +1,5 @@
 <h1 class="text-5xl text-center py-10">All Store</h1>
-
+<button class="store-btn ml-4" id="btn">get position</button>
 <table class="text-left mx-auto w-5/6">
   <thead>
     <tr>
@@ -24,3 +24,27 @@
 <%#= content_tag :button, 'Get Store', class: 'get_location' %>
 <%#= tag :div, class: 'location_result_list' %>
 
+<script>
+  const btn = document.getElementById('btn')
+  const options = {
+    maximumAge: 0,
+    timeout:5000,
+    enableHighAccuracy:true
+  }
+
+  function success(position) {
+    console.log(position.coords.latitude, position.coords.longitude);
+  }
+
+  function error(err) {
+    console.warn('ERROR(' + err.code + '): ' + err.message);
+    alert('You can\'t get the position!')
+  }
+
+  btn.addEventListener('click', (e) => {
+    e.preventDefault()
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(success, error, options)
+    }
+  })
+</script>
