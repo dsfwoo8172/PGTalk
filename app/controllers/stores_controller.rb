@@ -24,6 +24,13 @@ class StoresController < ApplicationController
     @stores = Store.all
   end
 
+  def get_location
+    @locations = Store.near([params[:latitude], params[:longitude]], 2000)
+    respond_to do |format|
+      format.json { render json: @locations }
+    end
+  end
+
   private
 
   def store_params

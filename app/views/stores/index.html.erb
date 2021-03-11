@@ -1,6 +1,7 @@
 <h1 class="text-5xl text-center py-10">All Store</h1>
-<button class="store-btn ml-4" id="btn">get position</button>
-<table class="text-left mx-auto w-5/6">
+<button class="store-btn ml-4" id="btn">nearby stores</button>
+
+<table class="text-left mx-auto w-5/6 show">
   <thead>
     <tr>
       <th scope="col">StoreName</th>
@@ -12,7 +13,7 @@
   <tbody>
     <% @stores.each do |store| %>
     <tr>
-      <th scope="row"><%= store.store_name %></th>
+      <td><%= store.store_name %></td>
       <td><%= store.latitude %></td>
       <td><%= store.longitude %></td>
       <td><%= store.address %></td>
@@ -21,11 +22,22 @@
   </tbody>
 </table>
 
+<template class="location_template">
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</template>
+
 <%#= content_tag :button, 'Get Store', class: 'get_location' %>
 <%#= tag :div, class: 'location_result_list' %>
 
 <script>
+  const show = document.querySelector('.show')
   const btn = document.getElementById('btn')
+  const tbody = document.querySelector('tbody')
   const options = {
     maximumAge: 0,
     timeout:5000,
@@ -34,6 +46,16 @@
 
   function success(position) {
     console.log(position.coords.latitude, position.coords.longitude);
+    $.ajax({
+      type: 'get',
+      url: `/stores/get_location.json?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}`,
+      success: (result) => {
+        console.log(result)
+        show.children[1].innerHTML = ''
+        createStores(result)
+      },
+      error: (err) => console.log(err.status)
+    })
   }
 
   function error(err) {
@@ -47,4 +69,18 @@
       navigator.geolocation.getCurrentPosition(success, error, options)
     }
   })
+
+  function createStores(options) {
+    const template = document.querySelector('.location_template')
+    let templateTds = template.content.querySelectorAll('td')
+    for (let i = 0; i < options.length; i++) {
+      templateTds[0].textContent = options[i].store_name
+      templateTds[1].textContent = options[i].latitude
+      templateTds[2].textContent = options[i].longitude
+      templateTds[3].textContent = options[i].address
+
+      let clone = document.importNode(template.content, true)
+      tbody.appendChild(clone)
+    }
+  }
 </script>
